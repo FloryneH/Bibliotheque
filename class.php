@@ -94,8 +94,5 @@ $bibliotheque = new Bibliotheque($pathCsv);
 
 // Affichage de la bibliothèque
 dump($bibliotheque);
-foreach($bibliotheque->livres as $livre){
-    dump($livre->genres, $livre->characters, $livre->awards);
-}
 
 
