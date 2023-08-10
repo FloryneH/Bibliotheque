@@ -1,0 +1,25 @@
+.p_btn_favourite {
+    background: #222 none repeat scroll 0 0;
+    border: 0 none;
+    box-shadow: 1px 0 1px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 0;
+    font-weight: 700;
+    line-height: 44px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    width: 200px;
+    transition: 0.5s;
+}
+a:visited {
+    color: #fff;
+}
+.p_btn_favourite:hover {
+    background-color: #ce7852;
+    color: #fff;
+}
+.info_livre {
+    display: flex;
+    flex-direction: column;    
+    justify-content: space-between;
+}

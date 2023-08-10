@@ -4,13 +4,13 @@ require 'class.php';
 
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Shop-Grid | Books Library eCommerce Store</title>
+    <title>Bilbliothèque</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -27,6 +27,7 @@ require 'class.php';
     <link rel="stylesheet" href="https://template.hasthemes.com/boighor/boighor/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://template.hasthemes.com/boighor/boighor/css/plugins.css">
     <link rel="stylesheet" href="https://template.hasthemes.com/boighor/boighor/css/style.css">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Cusom css -->
     <link rel="stylesheet" href="https://template.hasthemes.com/boighor/boighor/css/custom.css">
@@ -238,7 +239,7 @@ require 'class.php';
                                                 </div>
                                                 <div class="item01 d-flex mt--20">
                                                     <div class="thumb">
-                                                        <a href="product-details.html"><img src="images/product/sm-img/2.jpg" alt="product images"></a>
+                                                        <a href="product-details.html"><img src="https://template.hasthemes.com/boighor/boighor/images/product/sm-img/2.jpg" alt="product images"></a>
                                                     </div>
                                                     <div class="content">
                                                         <h6><a href="product-details.html">Compete Track Tote</a></h6>
@@ -495,7 +496,7 @@ require 'class.php';
                                 </ul>
                             </aside>
                             <aside class="widget__categories sidebar--banner">
-                                <img src="images/others/banner_left.jpg" alt="banner images">
+                                <img src="https://template.hasthemes.com/boighor/boighor/images/others/banner_left.jpg" alt="banner images">
                                 <div class="text">
                                     <h2>new products</h2>
                                     <h6>save up to <br> <strong>40%</strong>off</h6>
@@ -526,642 +527,73 @@ require 'class.php';
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab__container tab-content">
                             <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
                                 <div class="row">
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[0]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                           
-                                            <div class="hot__box">
-                                                <span class="hot-label">BEST SALLER</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center">
-                                            <h4><a href="single-product.html">robin parrish</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$35.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
+                                    <?php
+                                    foreach ($bibliotheque->livres as $livre) {
+                                        echo <<<HTML
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                                <div class="product product__style--3">
+                                                    <div class="product__thumb">
+                                                        <a class="first__img" href="single-product.html">
+                                                            <img src="{$livre->coverImg}" alt="product image" style="height: 450px;">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product__content content--center">
+                                                        <h4><a href="single-product.html">{$livre->title}</a></h4>
+                                                        <ul class="author">
+                                                            <li>{$livre->author}</li>
+                                                        </ul>
+                                                        <div>
+                                                            <ul class="rating d-flex">
+                                                                <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[1]->coverImg ?>" alt="product image " style="height: 450px;"></a>
-                                           
-                                            <div class="hot__box color--2">
-                                                <span class="hot-label">HOT</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center">
-                                            <h4><a href="single-product.html">The Remainng</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$35.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[2]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                           
-                                            <div class="hot__box">
-                                                <span class="hot-label">HOT</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center">
-                                            <h4><a href="single-product.html">Lando</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$35.00</li>
-                                                <li class="old_price">$50.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[3]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                           
-                                            <div class="hot__box">
-                                                <span class="hot-label">HOT</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center">
-                                            <h4><a href="single-product.html">Doctor Wldo</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$35.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[4]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                           
-                                            <div class="hot__box">
-                                                <span class="hot-label">BEST SALER</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center content--center">
-                                            <h4><a href="single-product.html">Animals Life</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$50.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[5]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                           
-                                            <div class="hot__box">
-                                                <span class="hot-label">BEST SALER</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center content--center">
-                                            <h4><a href="single-product.html">Olio Madu</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$50.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[6]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                           
-                                            <div class="hot__box">
-                                                <span class="hot-label">BEST SALER</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center content--center">
-                                            <h4><a href="single-product.html">Soad Humber</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$50.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[7]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                            
-                                            <div class="hot__box">
-                                                <span class="hot-label">BEST SALER</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center content--center">
-                                            <h4><a href="single-product.html">Animals Life</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$50.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[8]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                            
-                                            <div class="hot__box">
-                                                <span class="hot-label">BEST SALER</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center content--center">
-                                            <h4><a href="single-product.html">Olio Madu</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$50.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[9]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                           
-                                            <div class="hot__box">
-                                                <span class="hot-label">BEST SALER</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center content--center">
-                                            <h4><a href="single-product.html">War Of Dragon</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$50.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[10]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                           
-                                            <div class="hot__box">
-                                                <span class="hot-label">BEST SALER</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center content--center">
-                                            <h4><a href="single-product.html">New World</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$50.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <div class="product__thumb">
-                                            <a class="first__img" href="single-product.html"><img src="<?php echo $bibliotheque->livres[11]->coverImg ?>" alt="product image" style="height: 450px;"></a>
-                                            
-                                            <div class="hot__box">
-                                                <span class="hot-label">BEST SALER</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__content content--center content--center">
-                                            <h4><a href="single-product.html">Our World</a></h4>
-                                            <ul class="price d-flex">
-                                                <li>$50.00</li>
-                                                <li class="old_price">$35.00</li>
-                                            </ul>
-                                            <div class="action">
-                                                <div class="actions_inner">
-                                                    <ul class="add_to_links">
-                                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                        <li><a data-bs-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product__hover--content">
-                                                <ul class="rating d-flex">
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="on"><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
+                                        HTML;
+                                    }
+                                    ?>
                                 </div>
-                                <ul class="wn__pagination">
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
-                                </ul>
                             </div>
-                            <div class="shop-grid tab-pane fade" id="nav-list" role="tabpanel">
+
+                            <div class="shop-list tab-pane fade" id="nav-list" role="tabpanel">
                                 <div class="list__view__wrapper">
-                                    <!-- Start Single Product -->
-                                    <div class="list__view">
-                                        <div class="thumb">
-                                            <a class="first__img" href="single-product.html"><img src="https://template.hasthemes.com/boighor/boighor/images/product/1.jpg" alt="product images"></a>
-                                            <a class="second__img animation1" href="single-product.html"><img src="https://template.hasthemes.com/boighor/boighor/images/product/2.jpg" alt="product images"></a>
-                                        </div>
-                                        <div class="content">
-                                            <h2><a href="single-product.html">Ali Smith</a></h2>
-                                            <ul class="rating d-flex">
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                            <ul class="price__box">
-                                                <li>$111.00</li>
-                                                <li class="old__price">$220.00</li>
-                                            </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
-                                                augue nec est tristique auctor. Donec non est at libero vulputate
-                                                rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
-                                                vulputate adipiscing cursus eu, suscipit id nulla.</p>
-                                            <ul class="cart__action d-flex">
-                                                <li class="cart"><a href="cart.html">Add to cart</a></li>
-                                                <li class="wishlist"><a href="cart.html"></a></li>
-                                                <li class="compare"><a href="cart.html"></a></li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="list__view mt--40">
-                                        <div class="thumb">
-                                            <a class="first__img" href="single-product.html"><img src="images/product/2.jpg" alt="product images"></a>
-                                            <a class="second__img animation1" href="single-product.html"><img src="images/product/4.jpg" alt="product images"></a>
-                                        </div>
-                                        <div class="content">
-                                            <h2><a href="single-product.html">Blood In Water</a></h2>
-                                            <ul class="rating d-flex">
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                            <ul class="price__box">
-                                                <li>$111.00</li>
-                                                <li class="old__price">$220.00</li>
-                                            </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
-                                                augue nec est tristique auctor. Donec non est at libero vulputate
-                                                rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
-                                                vulputate adipiscing cursus eu, suscipit id nulla.</p>
-                                            <ul class="cart__action d-flex">
-                                                <li class="cart"><a href="cart.html">Add to cart</a></li>
-                                                <li class="wishlist"><a href="cart.html"></a></li>
-                                                <li class="compare"><a href="cart.html"></a></li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="list__view mt--40">
-                                        <div class="thumb">
-                                            <a class="first__img" href="single-product.html"><img src="images/product/3.jpg" alt="product images"></a>
-                                            <a class="second__img animation1" href="single-product.html"><img src="images/product/6.jpg" alt="product images"></a>
-                                        </div>
-                                        <div class="content">
-                                            <h2><a href="single-product.html">Madeness Overated</a></h2>
-                                            <ul class="rating d-flex">
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                            <ul class="price__box">
-                                                <li>$111.00</li>
-                                                <li class="old__price">$220.00</li>
-                                            </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
-                                                augue nec est tristique auctor. Donec non est at libero vulputate
-                                                rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
-                                                vulputate adipiscing cursus eu, suscipit id nulla.</p>
-                                            <ul class="cart__action d-flex">
-                                                <li class="cart"><a href="cart.html">Add to cart</a></li>
-                                                <li class="wishlist"><a href="cart.html"></a></li>
-                                                <li class="compare"><a href="cart.html"></a></li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="list__view mt--40">
-                                        <div class="thumb">
-                                            <a class="first__img" href="single-product.html"><img src="images/product/4.jpg" alt="product images"></a>
-                                            <a class="second__img animation1" href="single-product.html"><img src="images/product/6.jpg" alt="product images"></a>
-                                        </div>
-                                        <div class="content">
-                                            <h2><a href="single-product.html">Watching You</a></h2>
-                                            <ul class="rating d-flex">
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                            <ul class="price__box">
-                                                <li>$111.00</li>
-                                                <li class="old__price">$220.00</li>
-                                            </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
-                                                augue nec est tristique auctor. Donec non est at libero vulputate
-                                                rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
-                                                vulputate adipiscing cursus eu, suscipit id nulla.</p>
-                                            <ul class="cart__action d-flex">
-                                                <li class="cart"><a href="cart.html">Add to cart</a></li>
-                                                <li class="wishlist"><a href="cart.html"></a></li>
-                                                <li class="compare"><a href="cart.html"></a></li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
-                                    <!-- Start Single Product -->
-                                    <div class="list__view mt--40">
-                                        <div class="thumb">
-                                            <a class="first__img" href="single-product.html"><img src="images/product/5.jpg" alt="product images"></a>
-                                            <a class="second__img animation1" href="single-product.html"><img src="images/product/9.jpg" alt="product images"></a>
-                                        </div>
-                                        <div class="content">
-                                            <h2><a href="single-product.html">Court Wings Run</a></h2>
-                                            <ul class="rating d-flex">
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                            <ul class="price__box">
-                                                <li>$111.00</li>
-                                                <li class="old__price">$220.00</li>
-                                            </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
-                                                augue nec est tristique auctor. Donec non est at libero vulputate
-                                                rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
-                                                vulputate adipiscing cursus eu, suscipit id nulla.</p>
-                                            <ul class="cart__action d-flex">
-                                                <li class="cart"><a href="cart.html">Add to cart</a></li>
-                                                <li class="wishlist"><a href="cart.html"></a></li>
-                                                <li class="compare"><a href="cart.html"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Product -->
+                                    <?php
+                                    foreach ($bibliotheque->livres as $livre) {
+                                        echo <<<HTML
+                                            <div class="list__view mt--40">
+                                                <div class="thumb">
+                                                    <a class="first__img" href="single-product.html"><img src="{$livre->coverImg}" alt="product images"></a>
+                                                </div>
+                                                <div class="content info_livre">
+                                                    <h2><a href="single-product.html">{$livre->title}</a></h2>
+                                                    <ul class="author">
+                                                        <li>{$livre->author}</li>
+                                                    </ul>
+                                                    <ul class="rating d-flex">
+                                                        <li class="on"><i class="fa fa-star-o"></i></li>
+                                                        <li class="on"><i class="fa fa-star-o"></i></li>
+                                                        <li class="on"><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                    <p class="resume">{$livre->description}</p>
+                                                    <a href="#" class="p_btn_favourite">add to favourite</a>
+                                                </div>
+                                            </div>
+                                        HTML;
+                                    } ?>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -1177,7 +609,7 @@ require 'class.php';
                             <div class="footer__widget footer__menu">
                                 <div class="ft__logo">
                                     <a href="index.html">
-                                        <img src="images/logo/3.png" alt="logo">
+                                        <img src="https://template.hasthemes.com/boighor/boighor/images/logo/3.png" alt="logo">
                                     </a>
                                     <p>There are many variations of passages of Lorem Ipsum available, but the majority
                                         have suffered duskam alteration variations of passages</p>
@@ -1238,7 +670,7 @@ require 'class.php';
                                 <!-- Start product images -->
                                 <div class="product-images">
                                     <div class="main-image images">
-                                        <img alt="big images" src="images/product/big-img/1.jpg">
+                                        <img alt="big images" src="https://template.hasthemes.com/boighor/boighor/images/product/big-img/1.jpg">
                                     </div>
                                 </div>
                                 <!-- end product images -->
@@ -1311,6 +743,7 @@ require 'class.php';
     <!-- //Main wrapper -->
 
     <!-- JS Files -->
+    <script src="index.js"></script>
     <script src="https://template.hasthemes.com/boighor/boighor/js/vendor/jquery.min.js"></script>
     <script src="https://template.hasthemes.com/boighor/boighor/js/popper.min.js"></script>
     <script src="https://template.hasthemes.com/boighor/boighor/js/vendor/bootstrap.min.js"></script>
