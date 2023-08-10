@@ -86,13 +86,22 @@ class Bibliotheque
     }
 }
 
-// Chemin vers le fichier CSV
 $pathCsv = 'goodreads_Top100_YAFiction.csv';
-
-// Création d'une instance de Bibliotheque
 $bibliotheque = new Bibliotheque($pathCsv);
 
-// Affichage de la bibliothèque
 dump($bibliotheque);
 
 
+$genres = [];
+foreach ($bibliotheque->livres as $livre) {
+    foreach ($livre->genres as $genre) {
+        if (isset($genres[$genre])) {
+            $genres[$genre]++;
+        } else {
+            $genres[$genre] = 1;
+        }
+    }
+}
+arsort($genres);
+$trieGenres = array_slice($genres, 0, 20, true);
+dump($trieGenres);
