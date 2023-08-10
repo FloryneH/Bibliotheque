@@ -1,44 +1,48 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
-class Livre {
-    public $rank;
-    public $bookId;
-    public $title;
-    public $series;
-    public $numberOfSeries;
-    public $author;
-    public $authorLastFirst;
-    public $description;
-    public $language;
-    public $genres;
-    public $characters;
-    public $settings;
-    public $coverImg;
-    public $bookFormat;
-    public $edition;
-    public $pages;
-    public $publisher;
-    public $publishedYear;
-    public $firstPublishYear;
-    public $awards;
-    public $rating;
-    public $numRatings;
-    public $ISBN;
-    public $ISBN13;
+class Livre
+{
+    public int $rank;
+    public int $bookId;
+    public string $title;
+    public string $series;
+    public string $numberOfSeries;
+    public string $author;
+    public string $authorLastFirst;
+    public string $description;
+    public string $language;
+    public array $genres;
+    public array $characters;
+    public string $settings;
+    public string $coverImg;
+    public string $bookFormat;
+    public string $edition;
+    public int $pages;
+    public string $publisher;
+    public int $publishedYear;
+    public int $firstPublishYear;
+    public array $awards;
+    public float $rating;
+    public int $numRatings;
+    public string $ISBN;
+    public string $ISBN13;
 }
 
-class Bibliotheque {
+class Bibliotheque
+{
     // Propriété pour stocker les livres
-    public array $livres = array();
+    public array $livres = [];
 
     // Constructeur qui charge les livres depuis un fichier CSV
-    public function __construct($pathCsv) {
+    public function __construct($pathCsv)
+    {
         $this->dataLivres($pathCsv);
     }
 
     // Charger les livres depuis le fichier CSV
-    public function dataLivres($pathCsv) {
+    public function dataLivres($pathCsv)
+    {
         $file = fopen($pathCsv, 'r');
 
         fgetcsv($file, 5000);
@@ -49,8 +53,8 @@ class Bibliotheque {
             if ($data !== false) {
                 $livre = new Livre();
 
-                $livre->rank = $data[0];  
-                $livre->bookId = $data[1];
+                $livre->rank = (int)$data[0];
+                $livre->bookId = (int)$data[1];
                 $livre->title = $data[2];
                 $livre->series = $data[3];
                 $livre->numberOfSeries = $data[4];
@@ -58,22 +62,22 @@ class Bibliotheque {
                 $livre->authorLastFirst = $data[6];
                 $livre->description = $data[7];
                 $livre->language = $data[8];
-                $livre->genres = $data[9];
-                $livre->characters = $data[10];
+                $livre->genres = array_map('trim', explode(',', $data[9]));
+                $livre->characters = array_map('trim', explode(',', $data[10]));
                 $livre->settings = $data[11];
                 $livre->coverImg = $data[12];
                 $livre->bookFormat = $data[13];
                 $livre->edition = $data[14];
-                $livre->pages = $data[15];
+                $livre->pages = (int)$data[15];
                 $livre->publisher = $data[16];
-                $livre->publishedYear = $data[17];
-                $livre->firstPublishYear = $data[18];
-                $livre->awards = $data[19];
-                $livre->rating = $data[20];
-                $livre->numRatings = $data[21];
+                $livre->publishedYear = (int)$data[17];
+                $livre->firstPublishYear = (int)$data[18];
+                $livre->awards = array_map('trim', explode(',', $data[19]));
+                $livre->rating = (float)$data[20];
+                $livre->numRatings = (int)$data[21];
                 $livre->ISBN = $data[22];
                 $livre->ISBN13 = $data[23];
-                
+
                 $this->livres[] = $livre;
             }
         };
@@ -90,3 +94,8 @@ $bibliotheque = new Bibliotheque($pathCsv);
 
 // Affichage de la bibliothèque
 dump($bibliotheque);
+foreach($bibliotheque->livres as $livre){
+    dump($livre->genres, $livre->characters, $livre->awards);
+}
+
+
