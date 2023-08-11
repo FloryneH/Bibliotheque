@@ -490,13 +490,8 @@ require 'class.php';
                                     <p>Showing 1–12 of 40 results</p>
                                     <div class="orderby__wrapper">
                                         <span>Sort By</span>
-                                        <select class="shot__byselect">
-                                            <option>Default sorting</option>
-                                            <option>HeadPhone</option>
-                                            <option>Furniture</option>
-                                            <option>Jewellery</option>
-                                            <option>Handmade</option>
-                                            <option>Kids</option>
+                                        <select class="shot__byselect" name="tri">
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -572,31 +567,44 @@ require 'class.php';
                             <div class="shop-list tab-pane fade" id="nav-list" role="tabpanel">
                                 <div class="list__view__wrapper">
                                     <?php
+                                    $livresAffiches = 0;
                                     foreach ($bibliotheque->livres as $livre) {
-                                        echo <<<HTML
-                                            <div class="list__view mt--40">
-                                                <div class="thumb">
-                                                    <a class="first__img" href="single-product.html"><img src="{$livre->coverImg}" alt="product images"></a>
-                                                </div>
-                                                <div class="content info_livre">
-                                                    <h2><a href="single-product.html">{$livre->title}</a></h2>
-                                                    <ul class="author">
-                                                        <li>{$livre->author}</li>
-                                                    </ul>
-                                                    <ul class="rating d-flex">
-                                                        <li class="on"><i class="fa fa-star-o"></i></li>
-                                                        <li class="on"><i class="fa fa-star-o"></i></li>
-                                                        <li class="on"><i class="fa fa-star-o"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p class="resume">{$livre->description}</p>
-                                                    <a href="#" class="p_btn_favourite">add to favourite</a>
-                                                </div>
-                                            </div>
-                                        HTML;
+                                        if (!$genreSelectionne || in_array($genreSelectionne, $livre->genres)) {
+                                            if ($livresAffiches >= $indexDebut && $livresAffiches < $indexDebut + $livresParPage) {
+                                                echo <<<HTML
+                                                    <div class="list__view mt--40">
+                                                        <div class="thumb">
+                                                            <a class="first__img" href="single-product.html"><img src="{$livre->coverImg}" alt="product images"></a>
+                                                        </div>
+                                                        <div class="content info_livre">
+                                                            <h2><a href="single-product.html">{$livre->title}</a></h2>
+                                                            <ul class="author">
+                                                                <li>{$livre->author}</li>
+                                                            </ul>
+                                                            <ul class="rating d-flex">
+                                                                <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                            <p class="resume">{$livre->description}</p>
+                                                            <a href="#" class="p_btn_favourite">add to favourite</a>
+                                                        </div>
+                                                    </div>
+                                                HTML;
+                                            }
+                                            $livresAffiches++;
+                                        }
                                     } ?>
                                 </div>
+                                <ul class="wn__pagination">
+                                    <?php
+                                    for ($page = 1; $page <= ceil(count($livresCorrespondants) / $livresParPage); $page++) {
+                                        $lienPaginationListe = "index.php?genre=" . urlencode($genreSelectionne) . "&page=$page";
+                                        echo "<li" . ($page == $pageActuelle ? " class='active'" : "") . "><a href='$lienPaginationListe'>$page</a></li>";
+                                    } ?>
+                                </ul>
                             </div>
 
                         </div>

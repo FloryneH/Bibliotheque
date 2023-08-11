@@ -88,6 +88,7 @@ class Bibliotheque
 
 $pathCsv = 'goodreads_Top100_YAFiction.csv';
 $bibliotheque = new Bibliotheque($pathCsv);
+dump($bibliotheque);
 
 
 $genres = [];
@@ -102,3 +103,6 @@ foreach ($bibliotheque->livres as $livre) {
 }
 arsort($genres);
 $trieGenres = array_slice($genres, 0, 20, true);
+
+
+
