@@ -437,12 +437,13 @@ require 'class.php';
                     <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
                         <div class="shop__sidebar">
                             <aside class="widget__categories products--cat">
-                                <h3 class="widget__title">Product Categories</h3>
+                                <h3 class="widget__title">Categories</h3>
                                 <ul>
+                                    <li><a href="index.php">Tous <span>(<?= count($bibliotheque->livres) ?>)</span></a></li>
                                     <?php
-                                        foreach ($trieGenres as $genre => $numLivres) {
-                                            echo "<li><a href=\"#\">$genre <span>($numLivres)</span></a></li>";
-                                        }
+                                    foreach ($trieGenres as $genre => $numLivres) {
+                                        echo "<li><a href='index.php?genre=" . urlencode($genre) . "'>$genre <span>($numLivres)</span></a></li>";
+                                    }
                                     ?>
                                 </ul>
                             </aside>
@@ -469,27 +470,12 @@ require 'class.php';
                             <aside class="widget__categories products--tag">
                                 <h3 class="widget__title">Product Tags</h3>
                                 <ul>
-                                    <li><a href="#">Biography</a></li>
-                                    <li><a href="#">Business</a></li>
-                                    <li><a href="#">Cookbooks</a></li>
-                                    <li><a href="#">Health & Fitness</a></li>
-                                    <li><a href="#">History</a></li>
-                                    <li><a href="#">Mystery</a></li>
-                                    <li><a href="#">Inspiration</a></li>
-                                    <li><a href="#">Religion</a></li>
-                                    <li><a href="#">Fiction</a></li>
-                                    <li><a href="#">Fantasy</a></li>
-                                    <li><a href="#">Music</a></li>
-                                    <li><a href="#">Toys</a></li>
-                                    <li><a href="#">Hoodies</a></li>
+                                    <?php
+                                        foreach ($trieGenres as $genre => $numLivres) {
+                                            echo "<li><a href=\"#\">$genre</a></li>";
+                                        }
+                                    ?>
                                 </ul>
-                            </aside>
-                            <aside class="widget__categories sidebar--banner">
-                                <img src="https://template.hasthemes.com/boighor/boighor/images/others/banner_left.jpg" alt="banner images">
-                                <div class="text">
-                                    <h2>new products</h2>
-                                    <h6>save up to <br> <strong>40%</strong>off</h6>
-                                </div>
                             </aside>
                         </div>
                     </div>
@@ -521,37 +507,67 @@ require 'class.php';
                             <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
                                 <div class="row">
                                     <?php
+                                    $livresParPage = 9;
+                                    $pageActuelle = isset($_GET['page']) ? intval($_GET['page']) : 1;
+                                    $indexDebut = ($pageActuelle - 1) * $livresParPage;
+
+                                    $genreSelectionne = isset($_GET['genre']) ? $_GET['genre'] : null;
+
+                                    $livresAffiches = 0;  
                                     foreach ($bibliotheque->livres as $livre) {
-                                        echo <<<HTML
-                                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                                <div class="product product__style--3">
-                                                    <div class="product__thumb">
-                                                        <a class="first__img" href="single-product.html">
-                                                            <img src="{$livre->coverImg}" alt="product image" style="height: 450px;">
-                                                        </a>
-                                                    </div>
-                                                    <div class="product__content content--center">
-                                                        <h4><a href="single-product.html">{$livre->title}</a></h4>
-                                                        <ul class="author">
-                                                            <li>{$livre->author}</li>
-                                                        </ul>
-                                                        <div>
-                                                            <ul class="rating d-flex">
-                                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                                <li><i class="fa fa-star-o"></i></li>
-                                                                <li><i class="fa fa-star-o"></i></li>
+                                        if (!$genreSelectionne || in_array($genreSelectionne, $livre->genres)) { 
+                                            if ($livresAffiches >= $indexDebut && $livresAffiches < $indexDebut + $livresParPage) {
+                                                echo <<<HTML
+                                                <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                                    <div class="product product__style--3">
+                                                        <div class="product__thumb">
+                                                            <a class="first__img" href="single-product.html">
+                                                                <img src="{$livre->coverImg}" alt="product image" style="height: 450px;">
+                                                            </a>
+                                                        </div>
+                                                        <div class="product__content content--center">
+                                                            <h4><a href="single-product.html">{$livre->title}</a></h4>
+                                                            <ul class="author">
+                                                                <li>{$livre->author}</li>
                                                             </ul>
+                                                            <div>
+                                                                <ul class="rating d-flex">
+                                                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        HTML;
+                                                HTML;
+                                            }
+                                            $livresAffiches++;
+                                        }
                                     }
                                     ?>
                                 </div>
+                                <ul class="wn__pagination">
+                                    <?php
+                                    for ($page = 1; $page <= ceil(count($bibliotheque->livres) / $livresParPage); $page++) {
+                                        $lienPagination = "index.php?page=$page";
+                                        if ($genreSelectionne) {
+                                            $lienPagination .= "&genre=" . urlencode($genreSelectionne);
+                                        }
+                                        $livresCorrespondants = array_filter($bibliotheque->livres, function($livre) use ($genreSelectionne) {
+                                            return !$genreSelectionne || in_array($genreSelectionne, $livre->genres);
+                                        });
+                                        
+                                        if (count(array_slice($livresCorrespondants, ($page - 1) * $livresParPage, $livresParPage)) > 0) {
+                                            echo "<li" . ($page == $pageActuelle ? " class='active'" : "") . "><a href='$lienPagination'>$page</a></li>";
+                                        }
+                                    }
+                                    ?>
+                                </ul>
                             </div>
+
 
                             <div class="shop-list tab-pane fade" id="nav-list" role="tabpanel">
                                 <div class="list__view__wrapper">
