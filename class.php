@@ -84,10 +84,32 @@ class Bibliotheque
 
         fclose($file);
     }
+
+    public function sortByAuthor()
+    {
+        usort($this->livres, function ($a, $b) {
+            return strcmp($a->authorLastFirst, $b->authorLastFirst);
+        });
+    }
+
+    public function sortByTitle()
+    {
+        usort($this->livres, function ($a, $b) {
+            return strcmp($a->title, $b->title);
+        });
+    }
 }
 
 $pathCsv = 'goodreads_Top100_YAFiction.csv';
 $bibliotheque = new Bibliotheque($pathCsv);
+
+if (isset($_GET['action']) && $_GET['action'] === 'sort') {
+    if ($_GET['tri'] === 'author') {
+        $bibliotheque->sortByAuthor();
+    } elseif ($_GET['tri'] === 'title') {
+        $bibliotheque->sortByTitle();
+    }
+}
 
 
 

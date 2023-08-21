@@ -180,8 +180,8 @@ require 'class.php';
                                 <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
                                     <!--Start Toggle -->
                                     <div class="shop__list nav justify-content-center" role="tablist">
-                                        <a class="nav-item nav-link active" data-bs-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
-                                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
+                                        <a class="nav-item nav-link <?php if (!isset($_GET['view']) || $_GET['view'] === 'grid') echo 'active'; ?>" href="index.php?view=grid"><i class="fa fa-th"></i></a>
+                                        <a class="nav-item nav-link <?php if (isset($_GET['view']) && $_GET['view'] === 'list') echo 'active'; ?>" href="index.php?view=list"><i class="fa fa-list"></i></a>
                                     </div>
                                     <!-- End Toggle -->
 
@@ -189,11 +189,15 @@ require 'class.php';
 
                                     <!-- Start sort by -->
                                     <div class="orderby__wrapper">
-                                        <span>Sort By</span>
-                                        <select class="shot__byselect" name="tri">
-                                            <option value="author">Author</option>
-                                            <option value="title">Title</option>
-                                        </select>
+                                        <form method="get">
+                                            <span>Sort By</span>
+                                            <select class="shot__byselect" name="tri" onchange="this.form.submit()">
+                                                <option value="default" <?php if (isset($_GET['tri']) && $_GET['tri'] === 'default') echo 'selected'; ?>>Default</option>
+                                                <option value="author" <?php if (isset($_GET['tri']) && $_GET['tri'] === 'author') echo 'selected'; ?>>Author</option>
+                                                <option value="title" <?php if (isset($_GET['tri']) && $_GET['tri'] === 'title') echo 'selected'; ?>>Title</option>
+                                            </select>
+                                            <input type="hidden" name="action" value="sort">
+                                        </form>
                                     </div>
                                     <!-- End sort by -->
                                 </div>
@@ -203,35 +207,105 @@ require 'class.php';
 
                         <!-- Start books -->
                         <div class="tab__container tab-content">
-                            <!-- Start books grid -->
-                            <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
-                                <!-- Start Affichage -->
-                                <div class="row">
-                                    <?php
-                                    $livresParPage = 9;
-                                    $pageActuelle = isset($_GET['page']) ? intval($_GET['page']) : 1;
-                                    $indexDebut = ($pageActuelle - 1) * $livresParPage;
 
-                                    $genreSelectionne = isset($_GET['genre']) ? $_GET['genre'] : null;
+                            <?php $modeAffichage = isset($_GET['view']) && $_GET['view'] === 'list' ? 'list' : 'grid';
+                            if ($modeAffichage === 'grid') { ?>
 
-                                    $livresAffiches = 0;
-                                    foreach ($bibliotheque->livres as $livre) {
-                                        if (!$genreSelectionne || in_array($genreSelectionne, $livre->genres)) {
-                                            if ($livresAffiches >= $indexDebut && $livresAffiches < $indexDebut + $livresParPage) {
-                                                echo <<<HTML
-                                                <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                                    <div class="product product__style--3">
-                                                        <div class="product__thumb">
-                                                            <a class="first__img" href="single-product.html">
-                                                                <img src="{$livre->coverImg}" alt="product image" style="height: 450px;">
-                                                            </a>
+                                <!-- Start books grid -->
+                                <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
+                                    <!-- Start Affichage -->
+                                    <div class="row">
+                                        <?php
+                                        $livresParPage = 9;
+                                        $pageActuelle = isset($_GET['page']) ? intval($_GET['page']) : 1;
+                                        $indexDebut = ($pageActuelle - 1) * $livresParPage;
+
+                                        $genreSelectionne = isset($_GET['genre']) ? $_GET['genre'] : null;
+
+                                        $livresAffiches = 0;
+                                        foreach ($bibliotheque->livres as $livre) {
+                                            if (!$genreSelectionne || in_array($genreSelectionne, $livre->genres)) {
+                                                if ($livresAffiches >= $indexDebut && $livresAffiches < $indexDebut + $livresParPage) {
+                                                    echo <<<HTML
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                                        <div class="product product__style--3">
+                                                            <div class="product__thumb">
+                                                                <a class="first__img" href="single-product.html">
+                                                                    <img src="{$livre->coverImg}" alt="product image" style="height: 450px;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="product__content content--center">
+                                                                <h4><a href="single-product.html">{$livre->title}</a></h4>
+                                                                <ul class="author">
+                                                                    <li>{$livre->author}</li>
+                                                                </ul>
+                                                                <div>
+                                                                    <ul class="rating d-flex">
+                                                                        <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                        <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                        <li class="on"><i class="fa fa-star-o"></i></li>
+                                                                        <li><i class="fa fa-star-o"></i></li>
+                                                                        <li><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="product__content content--center">
-                                                            <h4><a href="single-product.html">{$livre->title}</a></h4>
-                                                            <ul class="author">
-                                                                <li>{$livre->author}</li>
-                                                            </ul>
-                                                            <div>
+                                                    </div>
+                                                    HTML;
+                                                }
+                                                $livresAffiches++;
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                    <!-- End Affichage -->
+
+                                    <!-- Start pagination -->
+                                    <ul class="wn__pagination">
+                                        <?php
+                                        for ($page = 1; $page <= ceil(count($bibliotheque->livres) / $livresParPage); $page++) {
+                                            $lienPaginationGrid = "index.php?page=$page";
+                                            if ($genreSelectionne) {
+                                                $lienPaginationGrid .= "&genre=" . urlencode($genreSelectionne);
+                                            }
+                                            if (isset($_GET['view']) && $_GET['view'] === 'grid') {
+                                                $lienPaginationGrid .= "&view=grid"; // Ajoutez le paramètre pour l'affichage en grille
+                                            }
+                                            echo "<li" . ($page == $pageActuelle ? " class='active'" : "") . "><a href='$lienPaginationGrid'>$page</a></li>";
+                                        }
+                                        ?>
+                                    </ul>
+                                    <!-- End pagination -->
+                                </div>
+                                <!-- End books grid -->
+
+                            <?php } else { ?>
+
+                                <!-- Start books list -->
+                                <div class="shop-list tab-pane fade <?php if (!isset($_GET['view']) || $_GET['view'] === 'list') echo 'active show'; ?>" id="nav-list" role="tabpanel">
+                                    <!-- Start Affichage -->
+                                    <div class="list__view__wrapper">
+                                    <?php
+                                        $livresParPage = 9; // Définir le nombre de livres par page
+                                        $pageActuelle = isset($_GET['page']) ? intval($_GET['page']) : 1;
+                                        $indexDebut = ($pageActuelle - 1) * $livresParPage;
+
+                                        $genreSelectionne = isset($_GET['genre']) ? $_GET['genre'] : null;
+
+                                        $livresAffiches = 0;
+                                        foreach ($bibliotheque->livres as $livre) {
+                                            if (!$genreSelectionne || in_array($genreSelectionne, $livre->genres)) {
+                                                if ($livresAffiches >= $indexDebut && $livresAffiches < $indexDebut + $livresParPage) {
+                                                    echo <<<HTML
+                                                        <div class="list__view mt--40">
+                                                            <div class="thumb">
+                                                                <a class="first__img" href="single-product.html"><img src="{$livre->coverImg}" alt="product images"></a>
+                                                            </div>
+                                                            <div class="content info_livre">
+                                                                <h2><a href="single-product.html">{$livre->title}</a></h2>
+                                                                <ul class="author">
+                                                                    <li>{$livre->author}</li>
+                                                                </ul>
                                                                 <ul class="rating d-flex">
                                                                     <li class="on"><i class="fa fa-star-o"></i></li>
                                                                     <li class="on"><i class="fa fa-star-o"></i></li>
@@ -239,90 +313,38 @@ require 'class.php';
                                                                     <li><i class="fa fa-star-o"></i></li>
                                                                     <li><i class="fa fa-star-o"></i></li>
                                                                 </ul>
+                                                                <p class="resume">{$livre->description}</p>
+                                                                <a href="#" class="p_btn_favourite">add to favourite</a>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                HTML;
+                                                    HTML;
+                                                }
+                                                $livresAffiches++;
                                             }
-                                            $livresAffiches++;
-                                        }
-                                    }
-                                    ?>
-                                </div>
-                                <!-- End Affichage -->
+                                        } ?>
+                                    </div>
+                                    <!-- End Affichage -->
 
-                                <!-- Start pagination -->
-                                <ul class="wn__pagination">
-                                    <?php
-                                    for ($page = 1; $page <= ceil(count($bibliotheque->livres) / $livresParPage); $page++) {
-                                        $lienPagination = "index.php?page=$page";
-                                        if ($genreSelectionne) {
-                                            $lienPagination .= "&genre=" . urlencode($genreSelectionne);
-                                        }
-                                        $livresCorrespondants = array_filter($bibliotheque->livres, function ($livre) use ($genreSelectionne) {
-                                            return !$genreSelectionne || in_array($genreSelectionne, $livre->genres);
-                                        });
-
-                                        if (count(array_slice($livresCorrespondants, ($page - 1) * $livresParPage, $livresParPage)) > 0) {
-                                            echo "<li" . ($page == $pageActuelle ? " class='active'" : "") . "><a href='$lienPagination'>$page</a></li>";
-                                        }
-                                    }
-                                    ?>
-                                </ul>
-                                <!-- Ens pagination -->
-                            </div>
-                            <!-- End books grid -->
-
-                            <!-- Start books list -->
-                            <div class="shop-list tab-pane fade" id="nav-list" role="tabpanel">
-                                <!-- Start Affichage -->
-                                <div class="list__view__wrapper">
-                                    <?php
-                                    $livresAffiches = 0;
-                                    foreach ($bibliotheque->livres as $livre) {
-                                        if (!$genreSelectionne || in_array($genreSelectionne, $livre->genres)) {
-                                            if ($livresAffiches >= $indexDebut && $livresAffiches < $indexDebut + $livresParPage) {
-                                                echo <<<HTML
-                                                    <div class="list__view mt--40">
-                                                        <div class="thumb">
-                                                            <a class="first__img" href="single-product.html"><img src="{$livre->coverImg}" alt="product images"></a>
-                                                        </div>
-                                                        <div class="content info_livre">
-                                                            <h2><a href="single-product.html">{$livre->title}</a></h2>
-                                                            <ul class="author">
-                                                                <li>{$livre->author}</li>
-                                                            </ul>
-                                                            <ul class="rating d-flex">
-                                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                                <li><i class="fa fa-star-o"></i></li>
-                                                                <li><i class="fa fa-star-o"></i></li>
-                                                            </ul>
-                                                            <p class="resume">{$livre->description}</p>
-                                                            <a href="#" class="p_btn_favourite">add to favourite</a>
-                                                        </div>
-                                                    </div>
-                                                HTML;
+                                    <!-- Start Pagination -->
+                                    <ul class="wn__pagination">
+                                        <?php
+                                        for ($page = 1; $page <= ceil(count($bibliotheque->livres) / $livresParPage); $page++) {
+                                            $lienPaginationListe = "index.php?page=$page";
+                                            if ($genreSelectionne) {
+                                                $lienPaginationListe .= "&genre=" . urlencode($genreSelectionne);
                                             }
-                                            $livresAffiches++;
+                                            if (isset($_GET['view']) && $_GET['view'] === 'list') {
+                                                $lienPaginationListe .= "&view=list"; // Ajoutez le paramètre pour l'affichage en liste
+                                            }
+                                            echo "<li" . ($page == $pageActuelle ? " class='active'" : "") . "><a href='$lienPaginationListe'>$page</a></li>";
                                         }
-                                    } ?>
+                                        ?>
+                                    </ul>
+                                    <!-- End Pagination -->
                                 </div>
-                                <!-- End Affichage -->
+                                <!-- End books list -->
 
-                                <!-- Start Pagination -->
-                                <ul class="wn__pagination">
-                                    <?php
-                                    for ($page = 1; $page <= ceil(count($livresCorrespondants) / $livresParPage); $page++) {
-                                        $lienPaginationListe = "index.php?genre=" . urlencode($genreSelectionne) . "&page=$page";
-                                        echo "<li" . ($page == $pageActuelle ? " class='active'" : "") . "><a href='$lienPaginationListe'>$page</a></li>";
-                                    } ?>
-                                </ul>
-                                <!-- End Pagination -->
-                            </div>
-                            <!-- End books list -->
+                            <?php } ?>
 
                         </div>
                         <!-- End books -->
