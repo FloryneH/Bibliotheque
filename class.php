@@ -88,7 +88,7 @@ class Bibliotheque
 
 $pathCsv = 'goodreads_Top100_YAFiction.csv';
 $bibliotheque = new Bibliotheque($pathCsv);
-dump($bibliotheque);
+
 
 
 $genres = [];
