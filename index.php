@@ -38,7 +38,7 @@ require 'class.php';
 
 <body>
 
-     <!-- Start Main wrapper -->
+    <!-- Start Main wrapper -->
     <div class="wrapper" id="wrapper">
         <!-- Start header -->
         <header id="wn__header" class="oth-page header__area header__absolute sticky__header">
@@ -48,7 +48,7 @@ require 'class.php';
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-7 col-lg-2">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="#">
                                 <img src="https://template.hasthemes.com/boighor/boighor/images/logo/logo.png" alt="logo images">
                             </a>
                         </div>
@@ -58,13 +58,13 @@ require 'class.php';
                     <div class="col-lg-8 d-none d-lg-block">
                         <nav class="mainmenu__nav">
                             <ul class="meninmenu d-flex justify-content-start">
-                                <li class="drop with--one--item"><a href="index.html">Home</a></li>
+                                <li class="drop with--one--item"><a href="#">Home</a></li>
                                 <li class="drop"><a href="#">Shop</a></li>
-                                <li class="drop"><a href="shop-grid.html">Books</a> </li>
-                                <li class="drop"><a href="shop-grid.html">Kids</a></li>
+                                <li class="drop"><a href="#">Books</a> </li>
+                                <li class="drop"><a href="#">Kids</a></li>
                                 <li class="drop"><a href="#">Pages</a></li>
-                                <li class="drop"><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li class="drop"><a href="#">Blog</a></li>
+                                <li><a href="#l">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -285,7 +285,7 @@ require 'class.php';
                                 <div class="shop-list tab-pane fade <?php if (!isset($_GET['view']) || $_GET['view'] === 'list') echo 'active show'; ?>" id="nav-list" role="tabpanel">
                                     <!-- Start Affichage -->
                                     <div class="list__view__wrapper">
-                                    <?php
+                                        <?php
                                         $livresParPage = 9; // Définir le nombre de livres par page
                                         $pageActuelle = isset($_GET['page']) ? intval($_GET['page']) : 1;
                                         $indexDebut = ($pageActuelle - 1) * $livresParPage;
